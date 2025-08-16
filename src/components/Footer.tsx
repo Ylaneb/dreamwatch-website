@@ -6,26 +6,27 @@ export default function Footer() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
+    const currentVideo = videoRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && videoRef.current) {
-            videoRef.current.play()
-          } else if (videoRef.current) {
-            videoRef.current.pause()
+          if (entry.isIntersecting && currentVideo) {
+            currentVideo.play()
+          } else if (currentVideo) {
+            currentVideo.pause()
           }
         })
       },
       { threshold: 0.5 }
     )
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current)
+    if (currentVideo) {
+      observer.observe(currentVideo)
     }
 
     return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current)
+      if (currentVideo) {
+        observer.unobserve(currentVideo)
       }
     }
   }, [])
@@ -61,7 +62,7 @@ export default function Footer() {
                 />
                 <h3 className="text-2xl font-bold mb-6">DreamWatch Digital</h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  At DreamWatch, we make digital watches that are all about innovation and your personal style. Our skilled developers use the latest technology to create each watch uniquely for you. Experience the future with DreamWatch and enjoy a digital timepiece that's as special as you are.
+                  At DreamWatch, we make digital watches that are all about innovation and your personal style. Our skilled developers use the latest technology to create each watch uniquely for you. Experience the future with DreamWatch and enjoy a digital timepiece that&apos;s as special as you are.
                 </p>
               </div>
 
