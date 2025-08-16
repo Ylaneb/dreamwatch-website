@@ -44,8 +44,13 @@ export default function Footer() {
                 muted
                 loop
                 playsInline
+                preload="metadata"
+                onError={(e) => console.error('Footer video error:', e)}
+                onLoadStart={() => console.log('Footer video loading...')}
+                onCanPlay={() => console.log('Footer video can play')}
               >
                 <source src="/videos/Movement-inner.mp4" type="video/mp4" />
+                <source src="/videos/8322342-uhd_4096_2160_25fps.mp4" type="video/mp4" />
               </video>
             </div>
           </div>

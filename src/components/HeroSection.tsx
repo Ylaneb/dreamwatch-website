@@ -8,9 +8,14 @@ export default function HeroSection() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover opacity-20"
+          onError={(e) => console.error('Hero video error:', e)}
+          onLoadStart={() => console.log('Hero video loading...')}
+          onCanPlay={() => console.log('Hero video can play')}
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src="/videos/8322342-uhd_4096_2160_25fps.mp4" type="video/mp4" />
         </video>
       </div>
       

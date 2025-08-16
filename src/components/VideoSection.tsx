@@ -1,4 +1,10 @@
+'use client'
+
+import { useState } from 'react'
+
 export default function VideoSection() {
+  const [videoError, setVideoError] = useState(false)
+
   return (
     <section className="py-16 bg-brand-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,26 +21,42 @@ export default function VideoSection() {
         {/* Video Container */}
         <div className="relative max-w-4xl mx-auto">
           <div className="aspect-video bg-brand-gray rounded-lg overflow-hidden shadow-2xl">
-            <video
-              className="w-full h-full object-cover"
-              controls
-              poster="/images/features/tech-demo.jpg"
-            >
-              <source src="/videos/dreamwatch-demo.mp4" type="video/mp4" />
-              <p className="text-brand-white p-8 text-center">
-                הדפדפן שלך לא תומך בנגינת וידאו.
-              </p>
-            </video>
+            {!videoError ? (
+              <video
+                className="w-full h-full object-cover"
+                controls
+                poster="/images/features/tech-demo.jpg"
+                onError={() => setVideoError(true)}
+                onLoadStart={() => console.log('Video loading...')}
+                onCanPlay={() => console.log('Video can play')}
+              >
+                <source src="/videos/8322342-uhd_4096_2160_25fps.mp4" type="video/mp4" />
+                <source src="/videos/hero-background.mp4" type="video/mp4" />
+                <p className="text-brand-white p-8 text-center">
+                  הדפדפן שלך לא תומך בנגינת וידאו.
+                </p>
+              </video>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-brand-gray">
+                <div className="text-center text-brand-white">
+                  <div className="text-6xl mb-4">📹</div>
+                  <p className="text-lg">וידאו לא זמין כרגע</p>
+                  <p className="text-sm text-gray-400 mt-2">נסה שוב מאוחר יותר</p>
+                </div>
+              </div>
+            )}
           </div>
           
-          {/* Play Button Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-brand-gold bg-opacity-90 rounded-full p-6 hover:bg-opacity-100 transition-all duration-300 cursor-pointer">
-              <svg className="w-12 h-12 text-brand-black" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+          {/* Play Button Overlay - Only show if video is not in error state */}
+          {!videoError && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="bg-brand-gold bg-opacity-90 rounded-full p-6 transition-all duration-300">
+                <svg className="w-12 h-12 text-brand-black" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Video Features */}
